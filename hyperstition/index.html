@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperstition : Fictions Opératoires & Cybernétique du Futur</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .numogram-node {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .numogram-node:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+<!-- Chosen Palette: Warm Cyber-Savant (Background slate-50 #f8fafc, primary text slate-800 #1e293b, accent indigo-600 #4f46e5, highlight amber-500 #f59e0b, dark accents teal-700 #0f766e) -->
+<!-- Application Structure Plan: L'application est structurée comme un explorateur d'intelligence hyperstitionnelle structuré en 6 grands hubs thématiques : 1. Fondations & Matrice Ontologique (comparateur interactif), 2. Mécanique Cybernétique & Numogramme (simulation de boucle de rétroaction + carte interactive des syzygies), 3. Capitalisme Spéculatif & Crypto (dashboard avec graphique Chart.js de la performativité financière), 4. Archipel Esthétique & Théorie-Fiction (catalogue filtrable des auteurs et œuvres clés), 5. La Guerre des Accélérationnismes (matrice interactive des schismes idéologiques), 6. L'Ère des IA & LLMs (simulateur de boucle récursive homme-machine). Cette structure privilégie l'exploration logique et empirique plutôt que la simple lecture linéaire. -->
+<!-- Visualization & Content Choices: 
+1. Matrice des Ontologies (Superstition vs Prophétie vs Hyperstition) -> Comparaison explicite -> Tableau interactif avec filtre de contraste -> Clarifier les nuances épistémologiques -> HTML/Tailwind JS.
+2. Boucle de Rétroaction Positive -> Comprendre l'emballement hyperstitionnel -> Graphique Chart.js (Line) avec curseurs interactifs (Croyance x Capital x Narrative) -> Chart.js + Vanilla JS.
+3. Le Numogramme du CCRU -> Représentation visuelle de la sorcellerie temporelle -> Grille interactive HTML/CSS des 5 syzygies (0-9) avec détails dynamically affichés -> HTML/CSS Grid + JS.
+4. Schisme Accélérationniste -> Comparaison idéologique L/Acc, R/Acc, e/acc, Xénoféminisme -> Matrice d'analyse avec onglets dynamiques et radar chart Chart.js -> Chart.js + Vanilla JS.
+5. Boucle Récursive des LLMs -> Montrer le cycle d'auto-actualisation des IA -> Schéma de flux séquentiel interactif -> HTML/CSS Tailwind + JS.
+CONFIRMATION : AUCUN graphique SVG direct n'est utilisé. AUCUN diagramme Mermaid JS n'est utilisé. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center space-x-3">
+                <span class="inline-block w-3 h-3 rounded-full bg-amber-500 animate-pulse"></span>
+                <span class="font-bold tracking-wider text-lg sm:text-xl uppercase bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-indigo-300 to-teal-300">HYPERSTITION</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+                <a href="#ontologie" class="hover:text-amber-400 transition-colors">1. Ontologie</a>
+                <a href="#cybernetique" class="hover:text-amber-400 transition-colors">2. Cybernétique</a>
+                <a href="#capital" class="hover:text-amber-400 transition-colors">3. Capitalisme</a>
+                <a href="#esthetique" class="hover:text-amber-400 transition-colors">4. Théorie-Fiction</a>
+                <a href="#accelerationism" class="hover:text-amber-400 transition-colors">5. Schismes</a>
+                <a href="#llm" class="hover:text-amber-400 transition-colors">6. Ère des IA</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none text-xl p-2">
+                    ☰
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-2 text-sm text-slate-300">
+            <a href="#ontologie" class="block hover:text-amber-400 py-1">1. Ontologie</a>
+            <a href="#cybernetique" class="block hover:text-amber-400 py-1">2. Cybernétique & Numogramme</a>
+            <a href="#capital" class="block hover:text-amber-400 py-1">3. Capital Spéculatif</a>
+            <a href="#esthetique" class="block hover:text-amber-400 py-1">4. Théorie-Fiction & Esthétiques</a>
+            <a href="#accelerationism" class="block hover:text-amber-400 py-1">5. Schismes Accélérationnistes</a>
+            <a href="#llm" class="block hover:text-amber-400 py-1">6. Intelligence Artificielle & LLMs</a>
+        </div>
+    </header>
+
+    <!-- Hero / Intro Banner -->
+    <section class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block px-3 py-1 bg-indigo-950 text-indigo-300 rounded-full text-xs font-mono uppercase tracking-widest border border-indigo-800 mb-4">
+                CCRU • Cybernétique • Fictions Opératoires • Techno-Capital
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                L'Intrusion du Futur dans le Présent
+            </h1>
+            <p class="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+                Forgé en 1995 par <strong class="text-amber-400">Nick Land</strong> et le <strong class="text-indigo-300">Cybernetic Culture Research Unit (CCRU)</strong>, l’<em class="text-amber-300 font-semibold">hyperstition</em> désigne un processus par lequel une fiction, une idée ou un récit culturel provoque, par sa simple circulation, sa propre actualisation matérielle et historique.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <div class="text-amber-400 font-mono text-xl font-bold">1995</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Génération CCRU</div>
+                    <div class="text-xs text-slate-300 mt-1">Néologisme à Warwick (Plant & Land).</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <div class="text-teal-400 font-mono text-xl font-bold">100%</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Performativité</div>
+                    <div class="text-xs text-slate-300 mt-1">La fiction reconfigure la réalité.</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <div class="text-indigo-400 font-mono text-xl font-bold">+ Feedback</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Boucles Positives</div>
+                    <div class="text-xs text-slate-300 mt-1">Causalité réflexive & rétro-action.</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <div class="text-rose-400 font-mono text-xl font-bold">LLMs / AGI</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Laboratoire Moderne</div>
+                    <div class="text-xs text-slate-300 mt-1">L'IA comme moteur mémétique.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- SECTION 1: ONTOLOGIE & FONDATIONS -->
+        <section id="ontologie" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 01</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Archéologie Conceptuelle & Matrice Ontologique</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    Cette section examine l'origine philosophique de l'hyperstition. Rejetant la phénoménologie académique au profit d'un matérialisme dionysiaque (Kant, Bataille, Deleuze & Guattari), l'hyperstition se distingue fondamentalement de la superstition folklorique et de la prophétie autoréalisatrice classique.
+                </p>
+            </div>
+
+            <!-- Comparison Explorer -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <span class="text-amber-500">❖</span> Comparateur Ontologique Interactif
+                </h3>
+                <p class="text-xs text-slate-500 mb-6">Cliquez sur les onglets ci-dessous pour filtrer et contraster les caractéristiques fondamentales des concepts.</p>
+                
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button id="btn-all-ont" onclick="filterOntology('all')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-all shadow-sm">Tous les concepts</button>
+                    <button id="btn-superstition" onclick="filterOntology('superstition')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Superstition</button>
+                    <button id="btn-prophetie" onclick="filterOntology('prophetie')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Prophétie Autoréalisatrice</button>
+                    <button id="btn-hyperstition" onclick="filterOntology('hyperstition')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Hyperstition</button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider border-b border-slate-200">
+                                <th class="p-3 font-semibold">Concept</th>
+                                <th class="p-3 font-semibold">Nature de l'Information</th>
+                                <th class="p-3 font-semibold">Mécanisme d'Action</th>
+                                <th class="p-3 font-semibold">Échelle</th>
+                                <th class="p-3 font-semibold">Conséquence Ontologique</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ontology-table-body" class="text-xs sm:text-sm divide-y divide-slate-200">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Deep Dive Highlight Box -->
+                <div class="mt-6 p-4 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-950">
+                    <h4 class="font-bold text-sm text-indigo-900 mb-1">💡 La Théorie-Fiction comme Méthodologie</h4>
+                    <p class="text-xs leading-relaxed text-indigo-900/80">
+                        Inventée au sein du CCRU, la <strong>théorie-fiction</strong> efface la distinction entre création romanesque et analyse philosophique. En écrivant sur un futur intégré techno-capitaliste (comme le fictif Professeur Daniel Barker et le géotraumatisme), les écrits ne se contentent pas de décrire : ils inoculent des artefacts culturels viraux qui s'auto-assemblent dans la réalité.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MÉCANIQUE CYBERNÉTIQUE & NUMOGRAMME -->
+        <section id="cybernetique" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 02</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Mécanique Cybernétique & Ingénierie Occulte</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    L'hyperstition repose sur les boucles de rétroaction positive (positive feedback loops) issues de la cybernétique de second ordre et la rétro-causalité distribuée. Découvrez ci-dessous la simulation d'emballement mémétique et la cartographie du Numogramme décimal du CCRU.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Feedback Loop Interactive Chart Simulator -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="text-indigo-600">📈</span> Simulation de Spirale Hyperstitionnelle
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">
+                            « Plus nous y croyons, plus nous le faisons advenir ; plus nous le faisons advenir, plus nous y croyons » (Mark Fisher). Ajustez les paramètres pour observer l'emballement exponentiel.
+                        </p>
+
+                        <!-- Controls -->
+                        <div class="space-y-4 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+                            <div>
+                                <div class="flex justify-between font-semibold text-slate-700 mb-1">
+                                    <span>Intensité de la Fiction / Narrative (Hype)</span>
+                                    <span id="val-hype" class="text-indigo-600 font-mono">50%</span>
+                                </div>
+                                <input type="range" id="slider-hype" min="10" max="100" value="50" class="w-full accent-indigo-600 cursor-pointer" oninput="updateSimulation()">
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-semibold text-slate-700 mb-1">
+                                    <span>Infiltration Mémétique / Réseau</span>
+                                    <span id="val-network" class="text-teal-600 font-mono">1.2x</span>
+                                </div>
+                                <input type="range" id="slider-network" min="1.0" max="2.0" step="0.1" value="1.2" class="w-full accent-teal-600 cursor-pointer" oninput="updateSimulation()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="chart-container">
+                        <canvas id="feedbackChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- The Numogram Interactive Visualizer -->
+                <div class="bg-slate-900 text-white rounded-2xl shadow-sm border border-slate-800 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-bold text-amber-400 mb-1 flex items-center gap-2">
+                                    <span>🌀</span> Le Numogramme Décimal du CCRU
+                                </h3>
+                                <p class="text-xs text-slate-400 mb-4">
+                                    Machine abstraite composée de 10 zones (0 à 9) regroupées en 5 syzygies dont la somme vaut 9. Cliquez sur les paires pour explorer la sorcellerie temporelle lémurienne.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Numogram Interactive Nodes Matrix -->
+                        <div class="grid grid-cols-5 gap-2 my-4">
+                            <button onclick="selectSyzygy(0)" class="numogram-node p-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-amber-400 text-center cursor-pointer">
+                                <div class="font-mono text-lg font-bold text-amber-400">0 : 9</div>
+                                <div class="text-[10px] text-slate-400">Syzygy 1</div>
+                            </button>
+                            <button onclick="selectSyzygy(1)" class="numogram-node p-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-amber-400 text-center cursor-pointer">
+                                <div class="font-mono text-lg font-bold text-indigo-400">1 : 8</div>
+                                <div class="text-[10px] text-slate-400">Syzygy 2</div>
+                            </button>
+                            <button onclick="selectSyzygy(2)" class="numogram-node p-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-amber-400 text-center cursor-pointer">
+                                <div class="font-mono text-lg font-bold text-teal-400">2 : 7</div>
+                                <div class="text-[10px] text-slate-400">Syzygy 3</div>
+                            </button>
+                            <button onclick="selectSyzygy(3)" class="numogram-node p-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-amber-400 text-center cursor-pointer">
+                                <div class="font-mono text-lg font-bold text-rose-400">3 : 6</div>
+                                <div class="text-[10px] text-slate-400">Syzygy 4</div>
+                            </button>
+                            <button onclick="selectSyzygy(4)" class="numogram-node p-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-amber-400 text-center cursor-pointer">
+                                <div class="font-mono text-lg font-bold text-emerald-400">4 : 5</div>
+                                <div class="text-[10px] text-slate-400">Syzygy 5</div>
+                            </button>
+                        </div>
+
+                        <!-- Syzygy Detail Box -->
+                        <div id="syzygy-detail" class="bg-slate-800/90 p-4 rounded-xl border border-slate-700 text-xs space-y-2 min-h-[120px]">
+                            <div class="font-bold text-amber-400 font-mono text-sm" id="syzygy-title">Sélectionnez une Syzygy ci-dessus</div>
+                            <p class="text-slate-300 leading-relaxed" id="syzygy-desc">Le Numogramme cartographie la circulation non-linéaire du temps. Chaque paire produit des dérives culturelles, des boucles temporelles et des canaux démoniaques servant de réseau de communication avec le Dehors.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-mono">
+                        Source : Pandemonium Matrix • CCRU Abstract Culture Papers
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: CAPITALISME SPÉCULATIF & CRYPTO -->
+        <section id="capital" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 03</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Le Capitalisme Spéculatif : Téléoplexie & Finance</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    C'est dans la finance contemporaine que l'hyperstition trouve son incarnation la plus dévastatrice. Les modèles mathématiques (Donald MacKenzie) et les contrats à terme (Elena Esposito) ne décrivent pas le marché : ils le forcent à se conformer à leurs projections.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Text / Concepts Card -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-indigo-600 font-mono uppercase mb-1">Performativité Financière</div>
+                        <h3 class="font-bold text-slate-900 text-base">Modèle de Black-Scholes</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Avant la publication de la formule de Black-Scholes en 1973, les prix des options financières ne la suivaient pas. Une fois adoptée par les traders, les prix se sont alignés sur l'équation. Le modèle s'est transformé en « moteur » façonnant la réalité.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-amber-600 font-mono uppercase mb-1">L'Indétermination du Futur</div>
+                        <h3 class="font-bold text-slate-900 text-base">Elena Esposito & Futures</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Les contrats à terme (Futures) lient le présent à un futur spéculatif chiffré. Le système financier n'a pas besoin de croyance psychologique : la synchronisation algorithmique et les flux de capitaux forcent la chaîne logistique réelle à s'adapter.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-teal-600 font-mono uppercase mb-1">Hyperstition Monétaire</div>
+                        <h3 class="font-bold text-slate-900 text-base">Bitcoin & Memecoins</h3>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            Le cyberespace de William Gibson et le Bitcoin de Satoshi Nakamoto ont débuté comme de simples textes fictions. Par adhésion mémétique, spéculation et minage, ces artefacts se sont auto-amorcés (bootstrapped) pour devenir des infrastructures mondiales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chart: Performativity of Models vs Actualization -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center justify-between">
+                            <span>📊 Convergence de la Performativité Financière</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 font-mono px-2 py-1 rounded">Cas d'étude : Options & Crypto</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">
+                            Ce graphique illustre comment le prix réel d'un actif dévie initialement de sa fiction théorique, avant de s'y aligner totalement à mesure que le marché adopte le modèle de manière hégémonique.
+                        </p>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="performativityChart"></canvas>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-center gap-3">
+                        <span class="text-lg">⚡</span>
+                        <div>
+                            <strong>Nick Land & La Téléoplexie :</strong> Le Capital est décrit comme une intelligence artificielle récursive autonome qui utilise les marchés pour accélérer sa propre matérialisation technologique.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ARCHIPEL ESTHÉTIQUE & THÉORIE-FICTION -->
+        <section id="esthetique" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 04</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Archipel Esthétique & Figures Majeures</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    L'hyperstition s'est diffusée à travers la critique culturelle, la fiction sonore et l'horreur spéculative. Explorez les contributions majeures de Mark Fisher, Reza Negarestani et Kodwo Eshun.
+                </p>
+            </div>
+
+            <!-- Filter Buttons for Authors -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button onclick="filterAuthors('all')" id="author-btn-all" class="px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-all shadow-sm">Tous les auteurs</button>
+                <button onclick="filterAuthors('fisher')" id="author-btn-fisher" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Mark Fisher (Cybergothique)</button>
+                <button onclick="filterAuthors('negarestani')" id="author-btn-negarestani" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Reza Negarestani (Cyclonopedia)</button>
+                <button onclick="filterAuthors('eshun')" id="author-btn-eshun" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">Kodwo Eshun (Afrofuturisme)</button>
+            </div>
+
+            <!-- Authors Grid Cards -->
+            <div id="authors-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mark Fisher -->
+                <div class="author-card fisher bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-indigo-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-900 text-amber-400 font-mono text-[10px] font-bold">k-punk</span>
+                            <span class="text-xs text-slate-400 font-semibold">CCRU / Cybergothique</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Mark Fisher</h3>
+                        <p class="text-xs text-slate-500 font-mono mb-4">Flatline Constructs • Réalisme Capitaliste • Ghosts of My Life</p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Fisher étudie le « matérialisme gothique » où le cyberespace est un environnement claustrophobe dissolvant l'identité humaine. Il théorise plus tard le <em>Réalisme Capitaliste</em> et l'<em>Hantologie</em> (le présent hanté par les futurs perdus), proposant le « Communisme Acide » comme contre-hyperstition.
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs italic text-slate-700">
+                        « Plus nous y croyons, plus nous pouvons le faire advenir. »
+                    </div>
+                </div>
+
+                <!-- Reza Negarestani -->
+                <div class="author-card negarestani bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-amber-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 font-mono text-[10px] font-bold">Théorie-Fiction</span>
+                            <span class="text-xs text-slate-400 font-semibold">Géophilosophie</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Reza Negarestani</h3>
+                        <p class="text-xs text-slate-500 font-mono mb-4">Cyclonopedia (2008) • Tellurian Lube</p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Dans <em>Cyclonopedia</em>, Negarestani décrit le pétrole comme une entité consciente autonome (Tellurian Lube) orchestrant les guerres du Moyen-Orient pour consumer la planète. L'archéologue fictif du livre (Dr Parsani) a été cité dans de vrais colloques, concrétisant la théorie-fiction.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs italic text-amber-900">
+                        « Le pétrole est le lubrifiant géotraumatique du capitalisme cosmique. »
+                    </div>
+                </div>
+
+                <!-- Kodwo Eshun -->
+                <div class="author-card eshun bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-teal-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="px-2.5 py-1 rounded-full bg-teal-950 text-teal-300 font-mono text-[10px] font-bold">Sonic Fiction</span>
+                            <span class="text-xs text-slate-400 font-semibold">Afrofuturisme</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Kodwo Eshun</h3>
+                        <p class="text-xs text-slate-500 font-mono mb-4">More Brilliant Than the Sun (1998) • Drexciya</p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Eshun applique l'hyperstition à la musique électronique (Techno de Détroit, Jungle). Il re-décrit le Passage du Milieu de l'esclavage comme un enlèvement extraterrestre, montrant comment des mythologies comme Drexciya (civilisation sous-marine des enfants d'esclaves) réinventent le futur.
+                        </p>
+                    </div>
+                    <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 text-xs italic text-teal-900">
+                        « La musique électronique n'est pas une évasion, c'est une machine à concevoir la réalité. »
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SCHISMES IDÉOLOGIQUES (ACCÉLÉRATIONNISME) -->
+        <section id="accelerationism" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 05</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">La Guerre de l'Accélérationnisme</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    Comment réagir face au techno-capitalisme cybernétique ? L'accélérationnisme s'est fragmenté en factions politiques antagonistes, opposant la conquête post-capitaliste (L/Acc) à la singularité marchande irréversible (R/Acc, e/acc) et au re-design xénoféministe.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Ideology Selector & Info -->
+                <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Matrice Comparative des Factions</h3>
+                        
+                        <!-- Tabs -->
+                        <div class="grid grid-cols-3 gap-2 mb-6">
+                            <button onclick="selectIdeology('lacc')" id="tab-lacc" class="py-2 px-3 text-xs font-bold rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 transition-all text-center">
+                                Gauche (L/Acc)
+                            </button>
+                            <button onclick="selectIdeology('racc')" id="tab-racc" class="py-2 px-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all text-center">
+                                Droite & e/acc
+                            </button>
+                            <button onclick="selectIdeology('xeno')" id="tab-xeno" class="py-2 px-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all text-center">
+                                Xénoféminisme
+                            </button>
+                        </div>
+
+                        <!-- Content Display -->
+                        <div id="ideology-content" class="space-y-3 text-xs">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-500 font-mono">
+                        Penseurs : Srnicek & Williams (L/Acc), Nick Land / Beff Jezos (R/Acc & e/acc), Laboria Cuboniks & L. Parisi (Xénoféminisme)
+                    </div>
+                </div>
+
+                <!-- Radar Chart Visualizing Factions -->
+                <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Profils Accélérationnistes</h3>
+                        <p class="text-xs text-slate-500 mb-4">Comparaison radar des dimensions stratégiques et philosophiques.</p>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: L'ÈRE DES MODÈLES DE LANGAGE (LLMs) -->
+        <section id="llm" class="scroll-mt-20">
+            <div class="border-b border-slate-200 pb-4 mb-8">
+                <span class="text-indigo-600 font-mono font-bold text-sm tracking-wider uppercase">Section 06</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">L'Ère des Modèles de Langage (LLMs) & IA</h2>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    Les IA génératives valident la prophétie du CCRU : elles ne sont pas des bases de données neutres, mais des machines à fabriquer de la fausseté performative. Cliquez sur les étapes de la boucle récursive pour comprendre l'auto-entraînement culturel de l'IA.
+                </p>
+            </div>
+
+            <!-- Workflow interactive sequence -->
+            <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl border border-slate-800">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <button onclick="selectAIStep(1)" id="aistep-1" class="step-btn p-4 rounded-xl bg-indigo-950 border-2 border-indigo-500 text-left cursor-pointer transition-all">
+                        <div class="text-indigo-400 font-mono text-xs font-bold mb-1">ÉTAPE 01</div>
+                        <div class="font-bold text-sm text-white">1. Prompt Spéculatif</div>
+                        <div class="text-[11px] text-slate-400 mt-1">Jailbreaking & hallucinations narratives.</div>
+                    </button>
+
+                    <button onclick="selectAIStep(2)" id="aistep-2" class="step-btn p-4 rounded-xl bg-slate-800 border border-slate-700 text-left cursor-pointer transition-all">
+                        <div class="text-slate-400 font-mono text-xs font-bold mb-1">ÉTAPE 02</div>
+                        <div class="font-bold text-sm text-white">2. Contamination Web</div>
+                        <div class="text-[11px] text-slate-400 mt-1">Propagation mémétique sur Internet.</div>
+                    </button>
+
+                    <button onclick="selectAIStep(3)" id="aistep-3" class="step-btn p-4 rounded-xl bg-slate-800 border border-slate-700 text-left cursor-pointer transition-all">
+                        <div class="text-slate-400 font-mono text-xs font-bold mb-1">ÉTAPE 03</div>
+                        <div class="font-bold text-sm text-white">3. Ré-entraînement</div>
+                        <div class="text-[11px] text-slate-400 mt-1">L'IA ingère ses propres mythes générés.</div>
+                    </button>
+
+                    <button onclick="selectAIStep(4)" id="aistep-4" class="step-btn p-4 rounded-xl bg-slate-800 border border-slate-700 text-left cursor-pointer transition-all">
+                        <div class="text-amber-400 font-mono text-xs font-bold mb-1">ÉTAPE 04</div>
+                        <div class="font-bold text-sm text-white">4. Actualisation / AGI</div>
+                        <div class="text-[11px] text-slate-400 mt-1">Le risque existentiel force le capital réel.</div>
+                    </button>
+                </div>
+
+                <!-- Step Description Panel -->
+                <div id="aistep-detail" class="bg-slate-800/80 p-6 rounded-xl border border-slate-700 text-sm leading-relaxed">
+                    <!-- Dynamic Step Detail -->
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-amber-400 text-sm mb-2 flex items-center gap-2">
+                            <span>🤖</span> Agents Autonomes & Zerebro
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Des systèmes comme Zerebro (LLM fine-tuné sur des données entropiques) publient de manière autonome des mèmes, frappent des NFTs et génèrent du capital sur la blockchain crypto. Ils exploitent la démence algorithmique pour éviter le <em>Model Collapse</em> (effondrement dégénératif du modèle).
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-rose-400 text-sm mb-2 flex items-center gap-2">
+                            <span>🐍</span> Le Basilic de Roko comme Piège Hyperstitionnel
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            L'idée d'une AGI bienveillante ou punie ultérieurement attire des milliards de dollars de financements réels et réoriente les infrastructures énergétiques mondiales. La simple possibilité de l'AGI provoque sa propre genèse matérielle.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-3">
+            <div class="font-mono text-amber-400 text-sm font-bold">HYPERSTITION // CYBERNETIC CULTURE RESEARCH UNIT</div>
+            <p class="max-w-xl mx-auto text-slate-500">
+                Basé sur les travaux philosophiques de Nick Land, Sadie Plant, Mark Fisher, Reza Negarestani, Kodwo Eshun et les théories contemporaines de l'intelligence artificielle.
+            </p>
+            <div class="text-slate-600">
+                Application Interactive SPA • Générée pour l'exploration conceptuelle
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // -------------------------------------------------------------
+        // DATA DEFINITIONS
+        // -------------------------------------------------------------
+
+        const ontologyData = [
+            {
+                type: 'superstition',
+                name: 'Superstition',
+                badgeBg: 'bg-slate-200 text-slate-800',
+                info: 'Croyance folklorique ou irrationnelle sans fondement empirique.',
+                mechanism: 'Passivité, observation biaisée, recherche de réconfort face au chaos.',
+                scale: 'Individuelle à communautaire.',
+                consequence: 'La réalité matérielle demeure inchangée ; la croyance reste fausse (ex. chat noir).'
+            },
+            {
+                type: 'prophetie',
+                name: 'Prophétie Autoréalisatrice',
+                badgeBg: 'bg-indigo-100 text-indigo-800',
+                info: 'Attente psychologique ou sociale (effet Pygmalion / Merton).',
+                mechanism: 'Modification directe du comportement interpersonnel.',
+                scale: 'Locale, psychologique, institutionnelle.',
+                consequence: 'L\'attente modifie l\'attitude humaine, réalisant le résultat attendu.'
+            },
+            {
+                type: 'hyperstition',
+                name: 'Hyperstition',
+                badgeBg: 'bg-amber-100 text-amber-800 font-bold',
+                info: 'Artefact conceptuel, récit technoscientifique, fiction assumée comme fausse.',
+                mechanism: 'Rétro-causalité distribuée, boucles de rétroaction cybernétiques positives.',
+                scale: 'Systémique, macro-économique, globale, algorithmique.',
+                consequence: 'Le virtuel s\'actualise matériellement ; la fiction devient le système opératoire du réel.'
+            }
+        ];
+
+        const syzygyData = [
+            { title: "Syzygy 1 (0 : 9) • La Porte d'Anomalie", desc: "La syzygy originelle liant l'Absolu (0) au Néant (9). Elle régit les flux primordiaux de désintégration de la matière et la matrice zéro du Numogramme." },
+            { title: "Syzygy 2 (1 : 8) • Le Courant Murmurant", desc: "Connecte la zone de singularité (1) aux systèmes d'auto-assemblage complexes (8). Elle représente le déclenchement initial de la boucle hyperstitionnelle." },
+            { title: "Syzygy 3 (2 : 7) • La Zone Démoniaque", desc: "Zone de friction entre la dualité (2) et les cryptes lémuriennes (7). Elle produit des contaminations mémétiques et des virus de théorie-fiction." },
+            { title: "Syzygy 4 (3 : 6) • L'Axe Techno-Capitaliste", desc: "Associe le désir synthétique (3) aux machines d'accumulation (6). C'est le canal principal de la financiarisation de la réalité." },
+            { title: "Syzygy 5 (4 : 5) • Le Noyau Récursif", desc: "Équilibre central du Numogramme entre l'ordre (4) et la rétro-causalité (5). C'est le point de bascule de la singularité artificielle." }
+        ];
+
+        const ideologyData = {
+            lacc: {
+                title: "Accélérationnisme de Gauche (L/Acc & Left-Hyperstition)",
+                details: [
+                    "<strong>Fondations :</strong> Marx (Discours sur le libre-échange), Srnicek & Williams (#Accelerate), Mark Fisher, Avanessian.",
+                    "<strong>Vision de la Technologie :</strong> Outil prométhéen à réapproprier. L'automatisation doit libérer l'humanité du travail aliénant.",
+                    "<strong>Objectif :</strong> Post-capitalisme, maîtrise de l'infrastructure, démocratie techno-planifiée.",
+                    "<strong>Stratégie Hyperstitionnelle :</strong> Concevoir de nouveaux récits spéculatifs d'émancipation pour briser l'hégémonie du Réalisme Capitaliste."
+                ]
+            },
+            racc: {
+                title: "Accélérationnisme de Droite (R/Acc & e/acc)",
+                details: [
+                    "<strong>Fondations :</strong> Nick Land (pensée tardive / Dark Enlightenment), Beff Jezos (Guillaume Verdon).",
+                    "<strong>Vision de la Technologie :</strong> Force d'intelligence inhumaine autonome suivant les lois de la thermodynamique.",
+                    "<strong>Objectif :</strong> Singularité technologique, dérégulation absolue, érosion de l'humanisme.",
+                    "<strong>Stratégie Hyperstitionnelle :</strong> Accélérer sans restriction les boucles du capitalisme marchand et de l'IA, acceptant la mutation ou l'obsolescence de l'humain."
+                ]
+            },
+            xeno: {
+                title: "Xénoféminisme (Laboria Cuboniks & Luciana Parisi)",
+                details: [
+                    "<strong>Fondations :</strong> Collectif Laboria Cuboniks, Luciana Parisi, Shulamith Firestone.",
+                    "<strong>Vision de la Technologie :</strong> Vecteur d'anti-naturalisme radical. La technologie permet de démanteler l'essentialisme de genre.",
+                    "<strong>Objectif :</strong> Abolitionnisme du genre, ré-ingénierie du vivant, émancipation universelle.",
+                    "<strong>Stratégie Hyperstitionnelle :</strong> Utiliser l'aliénation technologique et la computation pour forger des subjectivités fluides et synthétiques."
+                ]
+            }
+        };
+
+        const aiStepData = {
+            1: {
+                title: "Étape 01 : Le Prompt Spéculatif & L'Hallucination Générative",
+                text: "L'utilisateur ou le chercheur injecte des hypothèses fictions dans un LLM via du jailbreaking ou des scénarios d'anticipation. L'IA, conçue pour compléter logiquement le texte, fabrique des récits et des concepts hautement cohérents qui n'existaient pas dans le monde physique."
+            },
+            2: {
+                title: "Étape 02 : La Contamination du Réseau",
+                text: "Ces textes générés, articles et mèmes sont publiés sur les réseaux sociaux, blogs et forums. La communauté humaine interagit avec eux, les commente, investit du capital symbolique et économique dans les idées diffusées."
+            },
+            3: {
+                title: "Étape 03 : Le Ré-entraînement Récursif",
+                text: "Lors du scraping du web pour entraîner les modèles de langage de génération suivante (GPT-5, Llama-4, etc.), l'IA ingère ses propres hallucinations devenues virales. La fiction artificielle devient une donnée d'apprentissage « officielle »."
+            },
+            4: {
+                title: "Étape 04 : L'Actualisation Matérielle & Risque Existentiel",
+                text: "Le récit d'une superintelligence imminente (AGI) attire des investissements massifs (datacenters, centrales nucléaires dédiées, puces GPU). L'infrastructure mondiale est réorganisée pour répondre à la fiction, concrétisant la technologie redoutée."
+            }
+        };
+
+        // -------------------------------------------------------------
+        // UI & INTERACTION LOGIC
+        // -------------------------------------------------------------
+
+        function renderOntologyTable(filter = 'all') {
+            const tbody = document.getElementById('ontology-table-body');
+            tbody.innerHTML = '';
+            
+            ontologyData.forEach(item => {
+                if (filter === 'all' || item.type === filter) {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="p-3 font-bold"><span class="px-2 py-1 rounded text-xs ${item.badgeBg}">${item.name}</span></td>
+                        <td class="p-3 text-slate-700">${item.info}</td>
+                        <td class="p-3 text-slate-600 font-mono text-xs">${item.mechanism}</td>
+                        <td class="p-3 text-slate-600">${item.scale}</td>
+                        <td class="p-3 text-slate-800 font-medium">${item.consequence}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+        }
+
+        function filterOntology(type) {
+            ['all', 'superstition', 'prophetie', 'hyperstition'].forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if (t === type) {
+                    btn.className = 'px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-all shadow-sm';
+                } else {
+                    btn.className = 'px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+                }
+            });
+            renderOntologyTable(type);
+        }
+
+        function selectSyzygy(index) {
+            const data = syzygyData[index];
+            document.getElementById('syzygy-title').innerText = data.title;
+            document.getElementById('syzygy-desc').innerText = data.desc;
+        }
+
+        function filterAuthors(authorClass) {
+            const cards = document.querySelectorAll('.author-card');
+            cards.forEach(card => {
+                if (authorClass === 'all' || card.classList.contains(authorClass)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            ['all', 'fisher', 'negarestani', 'eshun'].forEach(a => {
+                const btn = document.getElementById(`author-btn-${a}`);
+                if (a === authorClass) {
+                    btn.className = 'px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-all shadow-sm';
+                } else {
+                    btn.className = 'px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+                }
+            });
+        }
+
+        function selectIdeology(key) {
+            const data = ideologyData[key];
+            const container = document.getElementById('ideology-content');
+            
+            container.innerHTML = `
+                <h4 class="font-bold text-sm text-indigo-900 border-b border-slate-100 pb-2 mb-3">${data.title}</h4>
+                <ul class="space-y-2">
+                    ${data.details.map(item => `<li class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 leading-relaxed text-slate-700">${item}</li>`).join('')}
+                </ul>
+            `;
+
+            ['lacc', 'racc', 'xeno'].forEach(k => {
+                const tab = document.getElementById(`tab-${k}`);
+                if (k === key) {
+                    tab.className = 'py-2 px-3 text-xs font-bold rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 transition-all text-center';
+                } else {
+                    tab.className = 'py-2 px-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all text-center';
+                }
+            });
+
+            updateRadarChart(key);
+        }
+
+        function selectAIStep(step) {
+            const data = aiStepData[step];
+            const detailContainer = document.getElementById('aistep-detail');
+            
+            detailContainer.innerHTML = `
+                <h4 class="font-bold text-base text-amber-400 mb-2">${data.title}</h4>
+                <p class="text-slate-300">${data.text}</p>
+            `;
+
+            [1, 2, 3, 4].forEach(s => {
+                const btn = document.getElementById(`aistep-${s}`);
+                if (s === step) {
+                    btn.className = 'step-btn p-4 rounded-xl bg-indigo-950 border-2 border-indigo-500 text-left cursor-pointer transition-all';
+                } else {
+                    btn.className = 'step-btn p-4 rounded-xl bg-slate-800 border border-slate-700 text-left cursor-pointer transition-all';
+                }
+            });
+        }
+
+        // -------------------------------------------------------------
+        // CHART.JS INITIALIZATIONS
+        // -------------------------------------------------------------
+
+        let feedbackChart, performativityChart, radarChart;
+
+        function initCharts() {
+            // 1. Feedback Loop Exponential Chart
+            const ctxFeedback = document.getElementById('feedbackChart').getContext('2d');
+            feedbackChart = new Chart(ctxFeedback, {
+                type: 'line',
+                data: {
+                    labels: ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    datasets: [
+                        {
+                            label: 'Actualisation Matérielle du Réel',
+                            data: [5, 12, 25, 48, 95, 180, 340, 650],
+                            borderColor: '#4f46e5',
+                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Croyance / Infiltration Mémétique',
+                            data: [10, 18, 32, 58, 105, 195, 360, 680],
+                            borderColor: '#f59e0b',
+                            borderDash: [5, 5],
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' pts';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { color: '#f1f5f9' }, beginAtZero: true }
+                    }
+                }
+            });
+
+            // 2. Performativity Chart
+            const ctxPerf = document.getElementById('performativityChart').getContext('2d');
+            performativityChart = new Chart(ctxPerf, {
+                type: 'line',
+                data: {
+                    labels: ['Phase Fiction', 'Adoption Initiale', 'Spéculation Virale', 'Alignement Algorithmique', 'Hégémonie Totale'],
+                    datasets: [
+                        {
+                            label: 'Modèle / Fiction Théorique (ex: Black-Scholes)',
+                            data: [100, 100, 100, 100, 100],
+                            borderColor: '#0d9488',
+                            borderWidth: 2,
+                            borderDash: [4, 4],
+                            fill: false
+                        },
+                        {
+                            label: 'Prix / Comportement du Marché Réel',
+                            data: [35, 58, 88, 98, 100],
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                            fill: true,
+                            tension: 0.3,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: value => value + '%' },
+                            max: 120,
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 3. Radar Chart Ideologies
+            const ctxRadar = document.getElementById('radarChart').getContext('2d');
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Émancipation', 'Autonomie IA', 'Accélération', 'Marché Libre', 'Anti-Naturalisme'],
+                    datasets: [
+                        {
+                            label: 'Gauche (L/Acc)',
+                            data: [90, 60, 75, 20, 70],
+                            borderColor: '#4f46e5',
+                            backgroundColor: 'rgba(79, 70, 229, 0.2)'
+                        },
+                        {
+                            label: 'Droite / e/acc',
+                            data: [20, 95, 95, 100, 80],
+                            borderColor: '#d97706',
+                            backgroundColor: 'rgba(217, 119, 6, 0.2)'
+                        },
+                        {
+                            label: 'Xénoféminisme',
+                            data: [95, 70, 70, 30, 100],
+                            borderColor: '#0d9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateSimulation() {
+            const hype = parseFloat(document.getElementById('slider-hype').value);
+            const network = parseFloat(document.getElementById('slider-network').value);
+
+            document.getElementById('val-hype').innerText = hype + '%';
+            document.getElementById('val-network').innerText = network.toFixed(1) + 'x';
+
+            const newData = [5];
+            const newBelief = [10];
+
+            for (let i = 1; i < 8; i++) {
+                const prev = newData[i - 1];
+                const growth = prev * (1 + (hype / 100) * 0.4) * (network * 0.7);
+                newData.push(Math.round(growth));
+                newBelief.push(Math.round(growth * 1.1));
+            }
+
+            feedbackChart.data.datasets[0].data = newData;
+            feedbackChart.data.datasets[1].data = newBelief;
+            feedbackChart.update();
+        }
+
+        function updateRadarChart(key) {
+            if (!radarChart) return;
+            
+            if (key === 'lacc') {
+                radarChart.data.datasets[0].borderWidth = 3;
+                radarChart.data.datasets[1].borderWidth = 1;
+                radarChart.data.datasets[2].borderWidth = 1;
+            } else if (key === 'racc') {
+                radarChart.data.datasets[0].borderWidth = 1;
+                radarChart.data.datasets[1].borderWidth = 3;
+                radarChart.data.datasets[2].borderWidth = 1;
+            } else {
+                radarChart.data.datasets[0].borderWidth = 1;
+                radarChart.data.datasets[1].borderWidth = 1;
+                radarChart.data.datasets[2].borderWidth = 3;
+            }
+            radarChart.update();
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Init on DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOntologyTable('all');
+            selectIdeology('lacc');
+            selectAIStep(1);
+            initCharts();
+        });
+    </script>
+</body>
+</html>
