@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse Socioculturelle et Esthétique du Cyber Gothisme</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 320px;
+      max-height: 380px;
+    }
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 360px;
+      }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-fuchsia-500 selection:text-white leading-relaxed">
+
+  <!-- Chosen Palette: Cyber-Toxique Harmonieux (Fond neutre clair slate-50/white, structures slate-900/800, accents fuchsia/magenta, vert néon/émeraude et violet électrique) -->
+
+  <!-- Application Structure Plan: 
+       L'application est structurée comme une plateforme interactive d'exploration sociologique et esthétique.
+       Au lieu de suivre linéairement un document plat, elle s'organise en 5 modules thématiques interconnectés :
+       1. Synthèse Executive & Métriques Clés (Overview dynamique).
+       2. Archéologie & Convergence (Généalogie, Games Workshop 1988, Cyberpunk, Ravers vs Goths).
+       3. Architecture Sonore & Musicologie (Explorateur interactif BPM/Genres, EBM vs Aggrotech, comparaison Chart.js).
+       4. Anatomie du Style & Modifications Transhumanistes (Explorateur visuel interactif : Cyberlox, Masques, Scarification).
+       5. Sociologie, Danse & Métamorphoses Numériques (Géographie des festivals, mème internet, Gatekeeping, Genre & Techwear).
+       
+       Pourquoi cette structure ? Pour permettre au chercheur, étudiant ou passionné de passer de la théorie (sociologie) à la pratique (musique/style) avec des outils interactifs (simulateurs de BPM, cartes de concepts, filtres dynamiques).
+  -->
+
+  <!-- Visualization & Content Choices:
+       - Métriques & KPI : Bannières interactives pour visualiser l'évolution temporelle et la répartition.
+       - Radar Chart (Chart.js) : Comparaison multi-axe des sous-genres musicaux (BPM, Synthèse, Agressivité, Vocaux, Esthétique).
+       - Horizontal Bar Chart (Chart.js) : Spectre sonore des Tempos (BPM) pour comprendre la cinétique de danse.
+       - Comparative Matrix : Trad Goth vs Cyber Goth (Structure dynamique de filtres HTML/JS).
+       - Anatomie Clickable (HTML/JS) : Inspecteur dynamique des éléments vestimentaires et modifications corporelles (Scarification, Cyberlox).
+       - Confirmation : AUCUN graphique SVG utilisé. AUCUNE bibliothèque Mermaid JS utilisée. Graphiques rendus exclusivement par Canvas via Chart.js.
+  -->
+
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+  <!-- EN-TÊTE DE NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl" aria-hidden="true">☣️</span>
+          <div>
+            <h1 class="font-bold text-lg tracking-wider text-emerald-400">CYBERGOTH <span class="text-fuchsia-500 font-normal">STUDIES</span></h1>
+            <p class="text-xs text-slate-400">Observatoire Métacritique de la Sous-Culture Cyber Gothique</p>
+          </div>
+        </div>
+        
+        <!-- Navigation bureau -->
+        <nav class="hidden md:flex space-x-1 lg:space-x-4 text-xs font-medium">
+          <a href="#overview" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-emerald-400 transition-colors">Vue d'ensemble</a>
+          <a href="#genealogy" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-emerald-400 transition-colors">Généalogie</a>
+          <a href="#music" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-emerald-400 transition-colors">Musique & EBM</a>
+          <a href="#aesthetics" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-emerald-400 transition-colors">Style & Chair</a>
+          <a href="#sociology" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-emerald-400 transition-colors">Sociologie & Mèmes</a>
+        </nav>
+
+        <!-- Barre de recherche rapide -->
+        <div class="relative hidden sm:block w-48 lg:w-64">
+          <input type="text" id="global-search" placeholder="Rechercher un concept..." class="w-full bg-slate-800 text-slate-200 text-xs rounded-full py-1.5 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 border border-slate-700">
+          <span class="absolute right-2.5 top-1.5 text-xs text-slate-400" aria-hidden="true">🔍</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNIÈRE D'ACCUEIL / HERO SECTION -->
+  <section id="overview" class="bg-gradient-to-br from-slate-900 via-slate-850 to-purple-950 text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="inline-flex items-center space-x-2 bg-fuchsia-950/80 border border-fuchsia-500/30 text-fuchsia-300 text-xs px-3 py-1 rounded-full">
+            <span>⚡ Rapport d'analyse sociologique & musicologique</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Phénoménologie et Évolution du <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-fuchsia-400 to-purple-400">Cyber Gothisme</span>
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Une sous-culture hybride née à la croisée du romantisme sombre, de l'énergie des raves, de la musique industrielle et du transhumanisme dystopique. Explorez son histoire, ses codes vestimentaires extrêmes, sa cinétique de danse et ses tensions identitaires.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3 text-xs">
+            <span class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg flex items-center space-x-1.5">
+              <span>📅 Origine conceptuelle :</span>
+              <strong class="text-emerald-400">1988 (Games Workshop)</strong>
+            </span>
+            <span class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg flex items-center space-x-1.5">
+              <span>🔊 Tempo Musique :</span>
+              <strong class="text-fuchsia-400">120 - 150+ BPM</strong>
+            </span>
+            <span class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg flex items-center space-x-1.5">
+              <span>🌍 Épicentres :</span>
+              <strong class="text-purple-300">Londres, Leipzig, Bruxelles</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Carte d'Action Métrique -->
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-4 shadow-xl backdrop-blur">
+          <h3 class="text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700 pb-2">Chiffres & Indicateurs Clefs</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50">
+              <p class="text-2xl font-black text-emerald-400">20 000</p>
+              <p class="text-[11px] text-slate-400 mt-1">Participants annuels au Wave-Gotik-Treffen (WGT)</p>
+            </div>
+            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50">
+              <p class="text-2xl font-black text-fuchsia-400">1984</p>
+              <p class="text-[11px] text-slate-400 mt-1">Invention du terme EBM par Front 242 (Belgique)</p>
+            </div>
+            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50">
+              <p class="text-2xl font-black text-purple-400">1994</p>
+              <p class="text-[11px] text-slate-400 mt-1">Fondation de la boutique Cyberdog à Camden</p>
+            </div>
+            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50">
+              <p class="text-2xl font-black text-amber-400">2011</p>
+              <p class="text-[11px] text-slate-400 mt-1">Viracité globale du mème "Cybergoth Dance Party"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- SECTION 1: ARCHÉOLOGIE ET GÉNÉALOGIE -->
+    <section id="genealogy" class="space-y-6">
+      <div class="border-l-4 border-emerald-500 pl-4">
+        <h2 class="text-2xl font-bold text-slate-900">1. Archéologie du Mouvement & Convergence Dystopique</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Cette section retrace la genèse sémantique et la fusion sociologique des sous-cultures nocturnes ayant donné naissance au phénomène cybergoth à la fin du XXe siècle.
+        </p>
+      </div>
+
+      <!-- Timeline des Origines -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">1988 — L'Origine Sémantique</span>
+            <span class="text-xl" aria-hidden="true">🎲</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Le Jeu de Rôle "Dark Future"</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Le terme "cybergoth" est forgé par l'éditeur britannique **Games Workshop** pour son jeu de rôle futuriste *Dark Future*. Il qualifie un univers post-apocalyptique dominé par les mégacorporations, la pollution et les déserts industriels, associant horreur gothique et science-fiction cyberpunk.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 bg-fuchsia-100 text-fuchsia-800 rounded-full">Fin 1990s — La Fusion "Graver"</span>
+            <span class="text-xl" aria-hidden="true">⚡</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Collision Raves & Schwarze Szene</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Dans les clubs allemands et britanniques, la culture rave (lumières UV, couleurs fluorescents, trance) percute la *Schwarze Szene* (scène noire gothique). Les précurseurs sont qualifiés de **"Gravers"** (Gothic + Ravers) par les analystes de la mode comme Julia Borden.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full">2000s — Cristallisation</span>
+            <span class="text-xl" aria-hidden="true">☣️</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">L'Incarner du Cyborg Dystopique</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Inspiré par William Gibson (*Neuromancien*) et Neal Stephenson, le mouvement adopte une esthétique transhumaniste. Le corps devient un terrain d'hybridation homme-machine pour exprimer une résistance codée face à une modernité étouffante.
+          </p>
+        </div>
+      </div>
+
+      <!-- Carte d'Analyse Comparative : Les trois piliers fondateurs -->
+      <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-lg border border-slate-800">
+        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-4">La Triple Filiation du Cybergothisme</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs">
+          <div class="border-l-2 border-fuchsia-500 pl-4 space-y-1">
+            <h4 class="font-bold text-white text-sm">Le Gothique Traditionnel</h4>
+            <p class="text-slate-400">Fournit le goût du sombre, le sentiment d'aliénation existentialiste et le rejet du conformisme sociétal.</p>
+          </div>
+          <div class="border-l-2 border-emerald-500 pl-4 space-y-1">
+            <h4 class="font-bold text-white text-sm">La Culture Rave</h4>
+            <p class="text-slate-400">Injecte l'énergie synthétique, l'esthétique fluorescente, la danse d'endurance cathartique et la réactivité UV.</p>
+          </div>
+          <div class="border-l-2 border-purple-500 pl-4 space-y-1">
+            <h4 class="font-bold text-white text-sm">Le Mouvement Industriologique (Rivethead)</h4>
+            <p class="text-slate-400">Apporte la rigueur militaire, l'équipement fétichisé (masques à gaz, goggles) et le culte du son mécanique.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ARCHITECTURE SONORE & MUSICOLOGIE -->
+    <section id="music" class="space-y-6">
+      <div class="border-l-4 border-fuchsia-500 pl-4">
+        <h2 class="text-2xl font-bold text-slate-900">2. Paysages Sonores : De l'EBM Belge à la Fureur de l'Aggrotech</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Cette section analyse la rupture radicale avec les guitares du Rock Gothique au profit d'une synthèse électronique martiale et synthétique, optimisée pour la danse industrielle de haute intensité.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Interactive Chart 1: Genre Attributes -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-sm">Profil d'Intensité & Caractéristiques Sonores</h3>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Chart.js Radar</span>
+          </div>
+          <p class="text-xs text-slate-500">
+            Comparaison multi-axe des paramètres musicologiques entre le Rock Gothique traditionnel, l'EBM originale et l'Aggrotech cybergoth moderne.
+          </p>
+          <!-- Chart Container -->
+          <div class="chart-container">
+            <canvas id="musicRadarChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Interactive Chart 2 & Genre Selector -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          <div class="space-y-2">
+            <h3 class="font-bold text-slate-900 text-sm">Filtre Dynamique par Tempo (BPM)</h3>
+            <p class="text-xs text-slate-500">
+              Faites glisser le curseur pour explorer les genres musicaux selon leur fréquence cardiaque auditive.
+            </p>
+            <div class="flex items-center space-x-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <label for="bpmSlider" class="text-xs font-bold text-slate-700 whitespace-nowrap">Tempo : <span id="bpmValue" class="text-fuchsia-600 font-black">135</span> BPM</label>
+              <input type="range" id="bpmSlider" min="90" max="160" value="135" class="w-full accent-fuchsia-600 cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Dynamic Genre Display -->
+          <div id="genreInfoCard" class="bg-slate-900 text-white p-5 rounded-xl space-y-3 transition-all">
+            <!-- Populated via JS -->
+          </div>
+
+          <!-- Chart Container BPM -->
+          <div class="chart-container">
+            <canvas id="bpmBarChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau Comparatif Structurel -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+          <h3 class="font-bold text-slate-900 text-sm">Matrice Comparative : Rock Gothique Trad vs Cyber Gothism (EBM / Aggrotech)</h3>
+          <span class="text-xs text-slate-500">Données issues du rapport</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-700">
+            <thead class="bg-slate-100 text-slate-900 uppercase font-semibold text-[11px] tracking-wider">
+              <tr>
+                <th class="px-4 py-3">Paramètre</th>
+                <th class="px-4 py-3">Rock Gothique Traditionnel (Trad Goth)</th>
+                <th class="px-4 py-3">Cyber Gothisme (EBM / Aggrotech)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-bold text-slate-900">Généalogie Musicale</td>
+                <td class="px-4 py-3">Post-punk, Batcave, Glam rock</td>
+                <td class="px-4 py-3">Techno, Rave, Musique Industrielle, Synthpunk</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-bold text-slate-900">Instrumentation</td>
+                <td class="px-4 py-3">Guitares chorusées, basses organiques, boîtes à rythmes simples</td>
+                <td class="px-4 py-3">Synthétiseurs (saw waves), séquenceurs complexes, kicks sur-compressés</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-bold text-slate-900">Tempo Dominant</td>
+                <td class="px-4 py-3 text-amber-700 font-medium">90 - 110 BPM (Lent, atmosphérique)</td>
+                <td class="px-4 py-3 text-fuchsia-700 font-medium">120 - 150 BPM (Martial, frénétique)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-bold text-slate-900">Traitement Vocal</td>
+                <td class="px-4 py-3">Voix claires, théâtrales, barytons mélancoliques (The Sisters of Mercy)</td>
+                <td class="px-4 py-3">Voix hurlées, vocodées, distordues, post-humaines (Combichrist, Hocico)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-bold text-slate-900">Thématiques</td>
+                <td class="px-4 py-3">Romantisme noir, mort, littérature classique, vampirisme</td>
+                <td class="px-4 py-3">Dystopie cybernétique, risque biologique, nihilisme, guerre, aliénation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ESTHÉTIQUE & TRANS HUMANISME -->
+    <section id="aesthetics" class="space-y-6">
+      <div class="border-l-4 border-purple-500 pl-4">
+        <h2 class="text-2xl font-bold text-slate-900">3. Sémiotique Vestimentaire & La Chair Réécrite</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          L'esthétique cybergoth constitue une "résistance codée". Découvrez l'uniforme synthétique et les pratiques de modification corporelle extrême (scarification, cautérisation).
+        </p>
+      </div>
+
+      <!-- Inspecteur d'Anatomie Interactif -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <h3 class="font-bold text-slate-900 text-sm">Explorateur Interactif des Éléments du Style & Modification Corporelle</h3>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="attireNav">
+          <button data-target="cyberlox" class="attire-btn active p-3 text-xs font-bold rounded-xl border border-fuchsia-500 bg-fuchsia-50 text-fuchsia-800 transition-all text-center">
+            💇‍♀️ Cyberlox
+          </button>
+          <button data-target="goggles" class="attire-btn p-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all text-center">
+            🥽 Lunettes & Masques
+          </button>
+          <button data-target="boots" class="attire-btn p-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all text-center">
+            🥾 Bottes Plateformes
+          </button>
+          <button data-target="materials" class="attire-btn p-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all text-center">
+            🖤 PVC & Néon
+          </button>
+          <button data-target="scarification" class="attire-btn p-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all text-center">
+            🗡️ Scarification
+          </button>
+          <button data-target="branding" class="attire-btn p-3 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all text-center">
+            ⚡ Électrocautérisation
+          </button>
+        </div>
+
+        <!-- Dynamic Content Display Box -->
+        <div id="attireDetail" class="bg-slate-900 text-white rounded-xl p-6 space-y-4">
+          <!-- Populated via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Focus Modificateurs Corporels Transhumanistes -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-purple-900 to-slate-900 text-white p-6 rounded-2xl shadow-md border border-purple-800/50 space-y-3">
+          <div class="flex items-center space-x-2 text-fuchsia-400 font-bold text-xs">
+            <span>🧬 RITUEL TRANSHUMANISTE</span>
+          </div>
+          <h4 class="font-bold text-lg">Pourquoi graver des circuits imprimés dans la chair ?</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Pour les cybergoths, intégrer des motifs de circuits imprimés ou des symboles *biohazard* par scarification relève d'une idéologie transhumaniste viscérale. Selon les travaux sociologiques sur le body-mod, souffrir volontairement permet de **reprendre possession de son corps** face aux diktats d'une société hygiéniste et puritaine.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-emerald-950 to-slate-900 text-white p-6 rounded-2xl shadow-md border border-emerald-800/50 space-y-3">
+          <div class="flex items-center space-x-2 text-emerald-400 font-bold text-xs">
+            <span>☣️️ SYMBOLOGIE CLINIQUE</span>
+          </div>
+          <h4 class="font-bold text-lg">Subversion des Symboles Toxiques</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Les crucifix, chauves-souris et ankhs du gothique romantique sont remplacés par le logo Biohazard, la radioactivité et la géométrie des puces électroniques. Le masque à gaz fétichisé symbolise une humanité étouffée par un environnement toxique post-apocalyptique.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: GÉOGRAPHIE SACRÉE ET LIEUX D'INCUBATION -->
+    <section class="space-y-6">
+      <div class="border-l-4 border-amber-500 pl-4">
+        <h2 class="text-2xl font-bold text-slate-900">4. Géographie Sacrée & Bastions du Mouvement</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          De Camden Market à la sous-culture belge et allemande, découvrez les espaces physiques qui soutiennent l'économie et la sociabilité cybergoth.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Hub 1: Camden Cyberdog -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">Royaume-Uni</span>
+            <span class="text-lg" aria-hidden="true">🛍️</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Camden Market & Cyberdog</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Fondée en 1994 par Terry Davy, la boutique Cyberdog est devenue un sanctuaire souterrain gardé par des statues de cyborgs géants. Elle a fourni l'uniforme officiel du mouvement : PVC réactif aux UV, circuits imprimés portables et accessoires techno.
+          </p>
+        </div>
+
+        <!-- Hub 2: WGT Leipzig -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Allemagne</span>
+            <span class="text-lg" aria-hidden="true">🎪</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Wave-Gotik-Treffen (WGT)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Créé en 1987 clandestinement en RDA à Potsdam, le WGT à Leipzig réunit 18 000 à 20 000 participants. Les cybergoths y côtoient les goths romantiques et metalleux, prouvant la perméabilité des frontières subculturelles.
+          </p>
+        </div>
+
+        <!-- Hub 3: Belgique EBM -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-fuchsia-700 bg-fuchsia-50 px-2.5 py-1 rounded-full">Belgique</span>
+            <span class="text-lg" aria-hidden="true">🏭</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">Coalescaremonium & Rockerill</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            À Bruxelles (Coalescaremonium sur le RIC's Art Boat) et Charleroi (Indus Nights dans les usines réhabilitées du Rockerill), la Belgique incarne l'écrin post-industriel naturel de l'EBM et des labels comme PIAS et Alfa Matrix.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SOCIOLOGIE, MEMES ET ÉVOLUTION DIGITALE -->
+    <section id="sociology" class="space-y-6">
+      <div class="border-l-4 border-slate-900 pl-4">
+        <h2 class="text-2xl font-bold text-slate-900">5. Sociologie, Danse Industrielle & Métamorphose Numérique</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Analyse du Gatekeeping ("Not Real Goth"), des rapports de genre selon Dunja Brill, du phénomène viral du mème "Cybergoth Dance Party" et de l'intégration dans le Techwear/TikTok.
+        </p>
+      </div>
+
+      <!-- Danse Industrielle & Mème YouTube -->
+      <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-amber-950 border border-amber-500/30 text-amber-300 text-xs px-3 py-1 rounded-full">
+              <span>🕺 Cinétique Subculturelle</span>
+            </div>
+            <h3 class="text-xl font-bold">L'Industrial Dance & Le Cas "Cybergoth Dance Party"</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              La danse industrielle est caractérisée par des piétinements martiaux (*stomping*) au rythme 4/4 à 130+ BPM et des balayages de bras angulaires traçant des lignes légères avec des *glowsticks*.
+            </p>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Le 7 septembre 2011, une vidéo de cybergoths dansant sous un pont autoroutier à Düsseldorf (Oberkasseler Brücke) devient un **mème mondial**. La culture web détourne la vidéo en remplaçant la musique industrielle par Mariah Carey ou *Thomas le Petit Train*, confrontant la sévérité du mouvement à l'humour absurde d'Internet.
+            </p>
+          </div>
+
+          <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 space-y-3 text-xs">
+            <h4 class="font-bold text-emerald-400 text-sm">Choc Culture Underground vs Web 2.0</h4>
+            <ul class="space-y-2 text-slate-300">
+              <li class="flex items-start space-x-2">
+                <span class="text-fuchsia-400">►</span>
+                <span><strong>Arrachement du Sanctuaire :</strong> L'exposition diurne force une pratique nocturne confinée à se retrouver exposée en plein jour.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-fuchsia-400">►</span>
+                <span><strong>Immortalité Numérique :</strong> Malgré la moquerie, le mème a pérennisé l'esthétique cybergoth dans les archives globales du web.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gatekeeping & Hiérarchies de Genre -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Gatekeeping Matrix -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm">Le Gatekeeping : "Not Real Goth"</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Les puristes ("Trad Goths") accusent le cybergothisme de profaner la sous-culture gothique en introduisant le néon (profanation du monochrome noir) et des musiques électroniques issues de la rave.
+          </p>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
+            <p class="font-bold text-slate-800">Théorie du Capital Sous-Culturel (Sarah Thornton / Paul Hodkinson) :</p>
+            <p class="text-slate-600">
+              Le gatekeeping sert à préserver l'authenticité d'un groupe, mais sur le terrain, la cohabitation dans les clubs locaux oblige les DJ à mélanger Darkwave, EBM et Aggrotech pour maintenir la piste occupée.
+            </p>
+          </div>
+        </div>
+
+        <!-- Gender Analysis (Dunja Brill) & Big Tiddy Goth GF -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm">Genre & La Fétichisation "Big Tiddy Goth GF"</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Dans ses travaux (*Goth Culture*), la sociologue **Dunja Brill** montre que si l'androgynie masculine est célébrée chez les hommes goths comme un capital transgressif, les femmes cybergoths sont souvent poussées vers une hyper-sexualisation (corsets PVC, fétichisme).
+          </p>
+          <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 space-y-2 text-xs text-rose-900">
+            <p class="font-bold">Dérive du Mème "Goth Girlfriend" :</p>
+            <p>
+              Cette fétichisation par le grand public réduit une sous-culture complexe à un simple fétiche consumériste pour e-girls/OnlyFans, effaçant la véritable implication musicale et transhumaniste du mouvement.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Évolution vers le Techwear et TikTok -->
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white p-6 rounded-2xl shadow-md border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-800">Années 2020 : La Mutation Darwinienne</span>
+          <h3 class="text-lg font-bold">Du Club Abandonné aux Fil d'Actualité TikTok</h3>
+          <p class="text-xs text-slate-300 max-w-2xl leading-relaxed">
+            Les pantalons à sangles (*bondage pants*) ont muté vers le **Techwear urbain**, les lunettes de soudeur vers des masques anti-pollution LED programmables, et l'esthétique s'est hybridée avec le **Glitchcore** et le style Y2K.
+          </p>
+        </div>
+        <a href="#overview" class="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold text-xs px-5 py-3 rounded-xl transition-colors whitespace-nowrap shadow-lg">
+          ▲ Remonter en haut
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIED DE PAGE -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 mt-16 text-xs">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+      <p class="text-slate-300 font-semibold">Observatoire d'Analyse des Sous-Cultures Alternatives — Cybergoth Studies</p>
+      <p class="text-slate-500">
+        Rapport basé sur les données sociologiques (Dunja Brill, Catherine Spooner, Sarah Thornton, Paul Hodkinson) et l'histoire des scènes électroniques industrielles.
+      </p>
+      <p class="text-slate-600 text-[10px]">
+        Application Web Monochrome / Neutre à haute valeur interactive. Développée en HTML5 / Tailwind CSS / Chart.js.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT INTERACTIF VANILLA JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // --- 1. CONFIGURATION CHART.JS RADAR (PROFIL MUSICAL) ---
+      const ctxRadar = document.getElementById('musicRadarChart').getContext('2d');
+      const musicRadarChart = new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+          labels: ['Tempo (BPM)', 'Synthèse Électronique', 'Agressivité Vocale', 'Éléments Organiques', 'Esthétique Néon/UV'],
+          datasets: [
+            {
+              label: 'Aggrotech / Cybergoth',
+              data: [95, 98, 90, 5, 95],
+              fill: true,
+              backgroundColor: 'rgba(217, 70, 239, 0.2)',
+              borderColor: '#d946ef',
+              pointBackgroundColor: '#d946ef',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#d946ef'
+            },
+            {
+              label: 'Electronic Body Music (EBM)',
+              data: [75, 85, 65, 10, 40],
+              fill: true,
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              borderColor: '#10b981',
+              pointBackgroundColor: '#10b981',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#10b981'
+            },
+            {
+              label: 'Rock Gothique Trad',
+              data: [40, 20, 30, 95, 5],
+              fill: true,
+              backgroundColor: 'rgba(148, 163, 184, 0.2)',
+              borderColor: '#94a3b8',
+              pointBackgroundColor: '#94a3b8',
+              pointBorderColor: '#fff'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: { color: '#e2e8f0' },
+              grid: { color: '#f1f5f9' },
+              pointLabels: {
+                font: { size: 10, weight: 'bold' },
+                color: '#334155'
+              },
+              ticks: { display: false }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { font: { size: 11 }, boxWidth: 12 }
+            }
+          }
+        }
+      });
+
+      // --- 2. CONFIGURATION CHART.JS BAR (SPECTRE TEMPO BPM) ---
+      const ctxBar = document.getElementById('bpmBarChart').getContext('2d');
+      const bpmBarChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: ['Rock Gothique', 'Darkwave', 'EBM Classique', 'Futurepop', 'Aggrotech / Harsh Electro'],
+          datasets: [{
+            label: 'Plage de Tempo Moyenne (BPM)',
+            data: [100, 110, 125, 135, 145],
+            backgroundColor: [
+              '#cbd5e1',
+              '#a7f3d0',
+              '#34d399',
+              '#f0abfc',
+              '#d946ef'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          scales: {
+            x: {
+              min: 80,
+              max: 160,
+              title: { display: true, text: 'Battements Par Minute (BPM)', font: { size: 10 } }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+
+      // --- 3. GESTION DU SLIDER INTERACTIF BPM ET DONNÉES GENRE ---
+      const bpmSlider = document.getElementById('bpmSlider');
+      const bpmValue = document.getElementById('bpmValue');
+      const genreInfoCard = document.getElementById('genreInfoCard');
+
+      const genreData = [
+        { min: 90, max: 110, name: "Rock Gothique & Coldwave", bpm: "90 - 110 BPM", desc: "Tempos lents, guitares chorusées, chant funèbre introspectif. Éponyme de The Sisters of Mercy, Bauhaus.", tag: "Trad Goth" },
+        { min: 111, max: 124, name: "Electronic Body Music (EBM)", bpm: "120 - 125 BPM", desc: "Basses séquencées, rythmes militaires, voix scandées. Inventé par Front 242 (1984) et propagé en Belgique.", tag: "Fondation Electro" },
+        { min: 125, max: 138, name: "Futurepop", bpm: "130 - 135 BPM", desc: "Synthèses mélodiques inspirées de la trance avec des voix claires ou vocodées. Émergé fin des années 1990 (VNV Nation, Covenant).", tag: "Mélodique" },
+        { min: 139, max: 160, name: "Aggrotech / Harsh Electro", bpm: "140 - 150+ BPM", desc: "La quintessence sonore Cybergoth. Saw waves saturées, kick 4/4 sur-compressé, voix vocodées monstrueuses, échantillons de films d'horreur. (Combichrist, Suicide Commando, Hocico).", tag: "Aggro Cybergoth" }
+      ];
+
+      function updateBpmInfo(bpm) {
+        bpmValue.textContent = bpm;
+        const currentGenre = genreData.find(g => bpm >= g.min && bpm <= g.max) || genreData[3];
+        
+        genreInfoCard.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-fuchsia-900 text-fuchsia-200 border border-fuchsia-700">${currentGenre.tag}</span>
+            <span class="text-xs text-slate-400">${currentGenre.bpm}</span>
+          </div>
+          <h4 class="font-bold text-emerald-400 text-sm">${currentGenre.name}</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">${currentGenre.desc}</p>
+        `;
+      }
+
+      bpmSlider.addEventListener('input', function(e) {
+        updateBpmInfo(parseInt(e.target.value));
+      });
+      // Initialiser
+      updateBpmInfo(135);
+
+      // --- 4. GESTION DES ONGLETS D'ANATOMIE DU STYLE & BODY MOD ---
+      const attireNav = document.getElementById('attireNav');
+      const attireDetail = document.getElementById('attireDetail');
+
+      const attireData = {
+        cyberlox: {
+          title: "Chevelure Cybernétique : Cyberlox & Dreadfalls",
+          subtitle: "Élément architectural fondamental de la silhouette post-humaine",
+          text: "LesCyberlox ne sont jamais composés de cheveux naturels. Fabriqués à partir de crinoline tubulaire (un filet synthétique extensible), de câbles électriques réels, de mousse industrielle et de fibres de kanekalon. Ils créent un effet de câblage extraterrestre et accentuent l'inertie visuelle lors de la danse industrielle."
+        },
+        goggles: {
+          title: "Lunettes de Soudeur & Masques à Gaz",
+          subtitle: "L'Anxiété Environnementale Fétichisée",
+          text: "Portées sur le front ou autour du cou, les goggles (lunettes de soudeur/aviateur) et les masques filtrants symbolisent une humanité étouffant dans une atmosphère toxique post-apocalyptique. C'est également une barrière psychologique contre le regard de la société classique."
+        },
+        boots: {
+          title: "Bottes à Plateformes Mégalo-Architecturales",
+          subtitle: "Marques phares : Demonia, New Rock",
+          text: "Lourdes bottes surélevées ornées de boucles et de plaques métalliques. Elles modifient le centre de gravité, imposant une démarche mécanisée indispensable à l'exécution des piétinements martiaux (*stomping*) de la danse industrielle."
+        },
+        materials: {
+          title: "Matériaux Synthétiques : PVC, Vinyle & Couleurs Néon",
+          subtitle: "Rupture avec le monochrome gothique",
+          text: "Une base d'un noir absolu (PVC brillant, résille, vinyle) violemment interrompue par des accents néon réactifs aux ultraviolets (UV) : vert acide, rose fuchsia, bleu électrique. Ce contraste visuel revendique l'artifice total."
+        },
+        scarification: {
+          title: "Scarification Chirurgicale & Cutting",
+          subtitle: "Modification corporelle irréversible",
+          text: "Incision de la peau au scalpel médical pour forcer la création de cicatrices hypertrophiques (chéloïdes) formant des motifs de circuits imprimés ou de biohazard. Certains adeptes retardent volontairement la cicatrisation avec des irritants pour amplifier le relief."
+        },
+        branding: {
+          title: "Électrocautérisation & Branding Thermique",
+          subtitle: "Technologie de la Chair Réécrite",
+          text: "Utilisation d'appareils de cautérisation électrique vaporisant la peau avec une précision chirurgicale. Ce rituel d'auto-détermination vise à transformer le sujet humain en un cyborg organique affirmé."
+        }
+      };
+
+      attireNav.addEventListener('click', function(e) {
+        const btn = e.target.closest('.attire-btn');
+        if(!btn) return;
+
+        // Mettre à jour les styles des boutons
+        document.querySelectorAll('.attire-btn').forEach(b => {
+          b.classList.remove('active', 'border-fuchsia-500', 'bg-fuchsia-50', 'text-fuchsia-800');
+          b.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-700');
+        });
+
+        btn.classList.add('active', 'border-fuchsia-500', 'bg-fuchsia-50', 'text-fuchsia-800');
+        btn.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-700');
+
+        const key = btn.getAttribute('data-target');
+        const data = attireData[key];
+
+        attireDetail.innerHTML = `
+          <div class="space-y-2">
+            <span class="text-xs font-bold text-fuchsia-400 tracking-wider uppercase">${data.subtitle}</span>
+            <h4 class="text-lg font-bold text-emerald-400">${data.title}</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">${data.text}</p>
+          </div>
+        `;
+      });
+
+      // Initialiser premier onglet
+      document.querySelector('.attire-btn[data-target="cyberlox"]').click();
+
+      // --- 5. RECHERCHE GLOBALE EN TEMPS RÉEL ---
+      const searchInput = document.getElementById('global-search');
+      searchInput.addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('main section, main .bg-white, main .bg-slate-900');
+
+        if(term === '') {
+          cards.forEach(card => card.style.opacity = '1');
+          return;
+        }
+
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if(text.includes(term)) {
+            card.style.opacity = '1';
+          } else {
+            card.style.opacity = '0.35';
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
